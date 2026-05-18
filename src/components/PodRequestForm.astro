@@ -1,0 +1,116 @@
+---
+const podEndpoint = 'https://script.google.com/macros/s/AKfycbwA8xPVfzK0jpt8pILjMWARB7MhohdOUhozTLFc1EwluKPU-dL09RsutuVBY9oZCQaU/exec';
+const inputClasses = 'mt-2 block w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-brand-slate shadow-sm transition placeholder:text-slate-400 focus:border-brand-blue focus:outline-none focus:ring-4 focus:ring-brand-signal/20';
+---
+
+<form
+	id="pod-request-form"
+	action={podEndpoint}
+	method="post"
+	target="pod-submit-frame"
+	class="rounded-3xl bg-white p-6 text-brand-slate shadow-freight ring-1 ring-slate-200 sm:p-8"
+>
+	<input type="hidden" name="request_type" value="pod" />
+	<input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
+
+	<div class="grid gap-6 sm:grid-cols-2">
+		<label class="block text-sm font-semibold" for="pod-first-name">
+			First name
+			<input class={inputClasses} id="pod-first-name" name="first_name" type="text" autocomplete="given-name" required />
+		</label>
+
+		<label class="block text-sm font-semibold" for="pod-last-name">
+			Last name
+			<input class={inputClasses} id="pod-last-name" name="last_name" type="text" autocomplete="family-name" required />
+		</label>
+
+		<label class="block text-sm font-semibold" for="pod-company">
+			Company
+			<input class={inputClasses} id="pod-company" name="company" type="text" autocomplete="organization" />
+		</label>
+
+		<label class="block text-sm font-semibold" for="pod-phone">
+			Phone number
+			<input class={inputClasses} id="pod-phone" name="phone" type="tel" autocomplete="tel" />
+		</label>
+
+		<label class="block text-sm font-semibold" for="pod-email">
+			Email address
+			<input class={inputClasses} id="pod-email" name="email" type="email" autocomplete="email" required />
+		</label>
+
+		<label class="block text-sm font-semibold" for="pod-load-number">
+			Load #
+			<input class={inputClasses} id="pod-load-number" name="load_number" type="text" placeholder="Load or reference number" required />
+		</label>
+
+		<label class="block text-sm font-semibold" for="pod-pickup-date">
+			Pickup date
+			<input class={inputClasses} id="pod-pickup-date" name="pickup_date" type="date" />
+		</label>
+
+		<label class="block text-sm font-semibold" for="pod-delivery-date">
+			Delivery date
+			<input class={inputClasses} id="pod-delivery-date" name="delivery_date" type="date" />
+		</label>
+
+		<label class="block text-sm font-semibold sm:col-span-2" for="pod-notes">
+			Notes
+			<textarea class={inputClasses} id="pod-notes" name="notes" rows="4" placeholder="Any customer, lane, or paperwork details that help us find the P.O.D."></textarea>
+		</label>
+	</div>
+
+	<p class="mt-4 text-xs leading-6 text-slate-500">
+		P.O.D. requests are sent to accounts@prestige.inc. A Prestige, Inc. team member will follow up with available paperwork.
+	</p>
+
+	<button
+		id="pod-submit-button"
+		type="submit"
+		class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-brand-safety px-6 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-navy shadow-sm transition hover:bg-sky-300 focus-visible:outline-brand-safety sm:w-auto"
+	>
+		Submit P.O.D. request
+	</button>
+
+	<p id="pod-form-note" aria-live="polite" class="mt-4 hidden rounded-2xl border border-brand-blue/20 bg-slate-50 p-4 text-sm leading-6 text-slate-700">
+		Sending your P.O.D. request...
+	</p>
+
+	<iframe title="P.O.D. request submission" name="pod-submit-frame" id="pod-submit-frame" class="hidden"></iframe>
+</form>
+
+<script>
+	const podForm = document.getElementById('pod-request-form') as HTMLFormElement | null;
+	const podFormNote = document.getElementById('pod-form-note');
+	const podSubmitButton = document.getElementById('pod-submit-button') as HTMLButtonElement | null;
+	const podSubmitFrame = document.getElementById('pod-submit-frame');
+	let podFormSubmitted = false;
+
+	podForm?.addEventListener('submit', () => {
+		podFormSubmitted = true;
+		if (podFormNote) {
+			podFormNote.classList.remove('hidden');
+			podFormNote.textContent = 'Sending your P.O.D. request...';
+		}
+		if (podSubmitButton) {
+			podSubmitButton.disabled = true;
+			podSubmitButton.textContent = 'Sending...';
+		}
+	});
+
+	podSubmitFrame?.addEventListener('load', () => {
+		if (!podFormSubmitted) return;
+
+		if (podFormNote) {
+			podFormNote.classList.remove('hidden');
+			podFormNote.textContent = 'Thanks — your P.O.D. request was sent to Accounting.';
+		}
+		if (podSubmitButton) {
+			podSubmitButton.disabled = false;
+			podSubmitButton.textContent = 'Submit P.O.D. request';
+		}
+
+		podForm?.reset();
+		podFormSubmitted = false;
+	});
+</script>
