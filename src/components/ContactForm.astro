@@ -11,16 +11,19 @@ const shipmentTypes: ShipmentType[] = [
 	{ value: 'other', label: 'Other logistics need' },
 ];
 
+const quoteEndpoint = 'https://script.google.com/macros/s/AKfycbwA8xPVfzK0jpt8pILjMWARB7MhohdOUhozTLFc1EwluKPU-dL09RsutuVBY9oZCQaU/exec';
 const inputClasses = 'mt-2 block w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-brand-slate shadow-sm transition placeholder:text-slate-400 focus:border-brand-blue focus:outline-none focus:ring-4 focus:ring-brand-signal/20';
 ---
 
 <form
 	id="quote-request-form"
-	action="mailto:operations@prestige.inc?cc=dispatch@prestige.inc&subject=New%20quote%20request%20from%20prestige.inc"
+	action={quoteEndpoint}
 	method="post"
-	enctype="text/plain"
+	target="quote-submit-frame"
 	class="rounded-3xl bg-white p-6 text-brand-slate shadow-freight ring-1 ring-slate-200 sm:p-8"
 >
+	<input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
+
 	<div class="grid gap-6 sm:grid-cols-2">
 		<label class="block text-sm font-semibold" for="first-name">
 			First name
@@ -88,50 +91,52 @@ const inputClasses = 'mt-2 block w-full rounded-xl border border-slate-300 bg-wh
 	</p>
 
 	<button
+		id="quote-submit-button"
 		type="submit"
 		class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-brand-safety px-6 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-navy shadow-sm transition hover:bg-sky-300 focus-visible:outline-brand-safety sm:w-auto"
 	>
-		Email quote request
+		Submit quote request
 	</button>
 
-	<p id="quote-form-note" class="mt-4 hidden rounded-2xl border border-brand-blue/20 bg-slate-50 p-4 text-sm leading-6 text-slate-700">
-		Your email app should open with the quote details filled in. Send that message to operations@prestige.inc and dispatch@prestige.inc.
+	<p id="quote-form-note" aria-live="polite" class="mt-4 hidden rounded-2xl border border-brand-blue/20 bg-slate-50 p-4 text-sm leading-6 text-slate-700">
+		Sending your quote request...
 	</p>
+
+	<iframe title="Quote request submission" name="quote-submit-frame" id="quote-submit-frame" class="hidden"></iframe>
 </form>
 
 <script>
-	const quoteForm = document.getElementById('quote-request-form');
+	const quoteForm = document.getElementById('quote-request-form') as HTMLFormElement | null;
 	const quoteFormNote = document.getElementById('quote-form-note');
+	const quoteSubmitButton = document.getElementById('quote-submit-button') as HTMLButtonElement | null;
+	const quoteSubmitFrame = document.getElementById('quote-submit-frame');
+	let quoteFormSubmitted = false;
 
-	quoteForm?.addEventListener('submit', (event) => {
-		event.preventDefault();
+	quoteForm?.addEventListener('submit', () => {
+		quoteFormSubmitted = true;
+		if (quoteFormNote) {
+			quoteFormNote.classList.remove('hidden');
+			quoteFormNote.textContent = 'Sending your quote request...';
+		}
+		if (quoteSubmitButton) {
+			quoteSubmitButton.disabled = true;
+			quoteSubmitButton.textContent = 'Sending...';
+		}
+	});
 
-		const formData = new FormData(quoteForm as HTMLFormElement);
-		const getValue = (name: string) => String(formData.get(name) || '').trim();
-		const fullName = `${getValue('first_name')} ${getValue('last_name')}`.trim();
-		const subject = `New quote request from ${getValue('company') || fullName || 'prestige.inc website'}`;
-		const body = [
-			'New quote request from prestige.inc',
-			'',
-			`Name: ${fullName}`,
-			`Company: ${getValue('company')}`,
-			`Phone: ${getValue('phone')}`,
-			`Email: ${getValue('email')}`,
-			`Origin: ${getValue('origin')}`,
-			`Destination: ${getValue('destination')}`,
-			`Shipment type: ${getValue('shipment_type')}`,
-			`SMS consent: ${getValue('sms_consent') || 'No'}`,
-			'',
-			'Shipment details:',
-			getValue('details') || 'Not provided',
-		].join('\n');
-
-		const mailtoUrl = `mailto:operations@prestige.inc?cc=dispatch@prestige.inc&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+	quoteSubmitFrame?.addEventListener('load', () => {
+		if (!quoteFormSubmitted) return;
 
 		if (quoteFormNote) {
 			quoteFormNote.classList.remove('hidden');
+			quoteFormNote.textContent = 'Thanks — your quote request was sent to Operations and Dispatch.';
+		}
+		if (quoteSubmitButton) {
+			quoteSubmitButton.disabled = false;
+			quoteSubmitButton.textContent = 'Submit quote request';
 		}
 
-		window.location.href = mailtoUrl;
+		quoteForm?.reset();
+		quoteFormSubmitted = false;
 	});
 </script>
