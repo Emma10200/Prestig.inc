@@ -4,5 +4,15 @@
 	"compatibility_date": "2026-05-18",
 	"assets": {
 		"directory": "./dist"
-	}
+	},
+	"routes": [
+		{
+			"pattern": "prestige.inc",
+			"custom_domain": true
+		},
+		{
+			"pattern": "www.prestige.inc",
+			"custom_domain": true
+		}
+	]
 }
