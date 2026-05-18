@@ -14,7 +14,13 @@ const shipmentTypes: ShipmentType[] = [
 const inputClasses = 'mt-2 block w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-brand-slate shadow-sm transition placeholder:text-slate-400 focus:border-brand-blue focus:outline-none focus:ring-4 focus:ring-brand-signal/20';
 ---
 
-<form action="#" method="post" class="rounded-3xl bg-white p-6 text-brand-slate shadow-freight ring-1 ring-slate-200 sm:p-8">
+<form action="https://formsubmit.co/operations@prestige.inc" method="post" class="rounded-3xl bg-white p-6 text-brand-slate shadow-freight ring-1 ring-slate-200 sm:p-8">
+	<input type="hidden" name="_cc" value="dispatch@prestige.inc" />
+	<input type="hidden" name="_subject" value="New quote request from prestige.inc" />
+	<input type="hidden" name="_template" value="table" />
+	<input type="hidden" name="_captcha" value="false" />
+	<input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+
 	<div class="grid gap-6 sm:grid-cols-2">
 		<label class="block text-sm font-semibold" for="first-name">
 			First name
@@ -83,7 +89,7 @@ const inputClasses = 'mt-2 block w-full rounded-xl border border-slate-300 bg-wh
 
 	<button
 		type="submit"
-		class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-brand-safety px-6 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-navy shadow-sm transition hover:bg-amber-300 focus-visible:outline-brand-safety sm:w-auto"
+		class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-brand-safety px-6 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-navy shadow-sm transition hover:bg-sky-300 focus-visible:outline-brand-safety sm:w-auto"
 	>
 		Submit quote request
 	</button>

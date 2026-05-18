@@ -14,6 +14,7 @@ interface ServiceCard {
 	title: string;
 	description: string;
 	bullets: string[];
+	icon: 'hazmat' | 'reefer' | 'team' | 'states';
 }
 
 interface ValueCard {
@@ -24,6 +25,7 @@ interface ValueCard {
 interface Stat {
 	value: string;
 	label: string;
+	id?: string;
 }
 
 interface Step {
@@ -47,9 +49,9 @@ const actionCards: ActionCard[] = [
 	},
 	{
 		title: 'Request a P.O.D.',
-		description: 'Need proof of delivery? Submit a request and our experienced personnel will help fulfill it.',
-		cta: 'Send Request',
-		href: '#contact',
+		description: 'Need proof of delivery? Send a request directly to our accounting team for quick document support.',
+		cta: 'Request P.O.D.',
+		href: 'mailto:accounts@prestige.inc?subject=Proof%20of%20Delivery%20Request',
 	},
 ];
 
@@ -58,21 +60,25 @@ const services: ServiceCard[] = [
 		title: 'Hazmat Certified',
 		description: 'Our drivers are skilled and professional, with hazmat and tanker endorsements for safe hazardous materials transportation.',
 		bullets: ['Hazmat-ready operations', 'Tanker endorsements', 'Experienced safety-first drivers'],
+		icon: 'hazmat',
 	},
 	{
 		title: 'Refrigerated',
 		description: 'Premium refrigerated units are expertly maintained and equipped for quality, reliability, and temperature-sensitive freight.',
 		bullets: ['Well-maintained reefers', 'Temperature-sensitive freight', 'Reliable cold-chain support'],
+		icon: 'reefer',
 	},
 	{
 		title: 'Team Drivers',
 		description: 'Expedited services tailored for time-sensitive shipments, supported by team drivers focused on efficient delivery.',
 		bullets: ['Expedited capability', 'Time-sensitive lanes', 'Efficient team-driver coverage'],
+		icon: 'team',
 	},
 	{
 		title: 'All 48 States',
 		description: 'Our fleet provides comprehensive coverage across all contiguous states, from regional moves to coast-to-coast freight.',
 		bullets: ['Coast-to-coast lanes', '48-state coverage', 'Dependable round-the-clock service'],
+		icon: 'states',
 	},
 ];
 
@@ -96,10 +102,9 @@ const valueCards: ValueCard[] = [
 ];
 
 const stats: Stat[] = [
-	{ value: '117', label: 'Active Trucks' },
-	{ value: '7,860,144', label: 'Miles Hauled' },
-	{ value: '1,056', label: 'Customers Served' },
-	{ value: '10+', label: 'Years of Experience' },
+	{ value: '10,238,742', label: 'Miles Hauled', id: 'miles-hauled' },
+	{ value: '2,000+', label: 'Customers Served' },
+	{ value: '20+', label: 'Years of Experience' },
 ];
 
 const steps: Step[] = [
@@ -126,9 +131,10 @@ const marqueeBadges: string[] = [
 	'Refrigerated Freight',
 	'Team Drivers',
 	'All 48 States',
-	'117 Active Trucks',
+	'10M+ Miles Hauled',
+	'2K+ Customers Served',
+	'20+ Years of Experience',
 	'24/7 Support',
-	'100+ Power Units',
 ];
 
 const marqueeItems = [...marqueeBadges, ...marqueeBadges];
@@ -144,8 +150,8 @@ const marqueeItems = [...marqueeBadges, ...marqueeBadges];
 		<div class="absolute inset-0 -z-10 bg-grid-faint opacity-50" aria-hidden="true"></div>
 		<div class="absolute inset-x-0 top-0 -z-10 h-48 bg-gradient-to-b from-white/10 to-transparent" aria-hidden="true"></div>
 
-		<div class="mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-20 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pb-28 lg:pt-28">
-			<div class="flex flex-col justify-center">
+		<div class="mx-auto max-w-7xl px-6 pb-20 pt-20 sm:px-8 lg:px-10 lg:pb-28 lg:pt-28">
+			<div class="flex max-w-4xl flex-col justify-center">
 				<span class="inline-flex w-fit items-center gap-2 rounded-full border border-brand-safety/40 bg-brand-safety/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-brand-safety">
 					<span class="inline-block h-2 w-2 rounded-full bg-brand-safety" aria-hidden="true"></span>
 					Prestige, Inc.
@@ -193,43 +199,6 @@ const marqueeItems = [...marqueeBadges, ...marqueeBadges];
 					</div>
 				</div>
 			</div>
-
-			<aside class="grid gap-4 lg:min-h-[34rem]" aria-label="Prestige operations highlights">
-				<div class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 shadow-freight backdrop-blur">
-					<div class="absolute inset-0 bg-gradient-to-br from-brand-signal/20 via-transparent to-brand-safety/20" aria-hidden="true"></div>
-					<div class="relative grid h-full content-between gap-12">
-						<div class="flex items-start justify-between gap-6">
-							<div>
-								<p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-mist">Current Capacity</p>
-								<p class="mt-3 text-5xl font-black text-white">117</p>
-								<p class="mt-1 text-sm uppercase tracking-[0.18em] text-slate-300">Active Trucks</p>
-							</div>
-							<span class="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-emerald-300">48 States</span>
-						</div>
-						<div class="grid grid-cols-2 gap-4">
-							<div class="rounded-2xl border border-white/10 bg-brand-navy/60 p-5">
-								<p class="text-xs uppercase tracking-[0.18em] text-slate-400">Fleet</p>
-								<p class="mt-2 text-lg font-bold text-white">100+ Power Units</p>
-							</div>
-							<div class="rounded-2xl border border-white/10 bg-brand-navy/60 p-5">
-								<p class="text-xs uppercase tracking-[0.18em] text-slate-400">Coverage</p>
-								<p class="mt-2 text-lg font-bold text-white">Coast to Coast</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="grid gap-4 sm:grid-cols-2">
-					<div class="rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-6">
-						<p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-safety">Hazmat</p>
-						<p class="mt-3 text-2xl font-black uppercase">Certified drivers</p>
-					</div>
-					<div class="rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-6">
-						<p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-signal">Reefer</p>
-						<p class="mt-3 text-2xl font-black uppercase">Premium units</p>
-					</div>
-				</div>
-			</aside>
 		</div>
 	</section>
 
@@ -310,16 +279,62 @@ const marqueeItems = [...marqueeBadges, ...marqueeBadges];
 				<p class="max-w-xl leading-7 text-slate-300">Scale, coverage, and experience that support dependable service across the contiguous United States.</p>
 			</div>
 
-			<dl class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+			<dl class="mt-12 grid gap-5 sm:grid-cols-3">
 				{stats.map((stat) => (
 					<div class="rounded-3xl border border-white/10 bg-white/[0.04] p-7 text-center">
 						<dt class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{stat.label}</dt>
-						<dd class="mt-3 text-4xl font-black text-white lg:text-5xl">{stat.value}</dd>
+						<dd id={stat.id} class="mt-3 text-4xl font-black text-white lg:text-5xl">{stat.value}</dd>
 					</div>
 				))}
 			</dl>
 		</div>
 	</section>
+
+	<script>
+		const milesElement = document.getElementById('miles-hauled');
+
+		if (milesElement) {
+			const formatter = new Intl.NumberFormat('en-US');
+			const baseMiles = 10238742;
+			const baseTime = Date.UTC(2026, 4, 18, 0, 0, 0);
+			const estimatedFleetMilesPerSecond = 1.35;
+			const storageKey = 'prestigeMilesHauled';
+			const elapsedMiles = Math.max(0, Math.floor(((Date.now() - baseTime) / 1000) * estimatedFleetMilesPerSecond));
+			let currentMiles = baseMiles + elapsedMiles;
+
+			try {
+				const storedMiles = Number(window.localStorage.getItem(storageKey));
+				if (Number.isFinite(storedMiles)) {
+					currentMiles = Math.max(currentMiles, storedMiles);
+				}
+			} catch {
+				// localStorage can be unavailable in private or restricted browsing modes.
+			}
+
+			const renderMiles = () => {
+				milesElement.textContent = formatter.format(currentMiles);
+			};
+
+			const scheduleNextUpdate = () => {
+				const delay = 7000 + Math.random() * 10000;
+				window.setTimeout(() => {
+					currentMiles += Math.floor(12 + Math.random() * 54);
+					renderMiles();
+
+					try {
+						window.localStorage.setItem(storageKey, String(currentMiles));
+					} catch {
+						// Non-critical; the counter still updates for the current page view.
+					}
+
+					scheduleNextUpdate();
+				}, delay);
+			};
+
+			renderMiles();
+			scheduleNextUpdate();
+		}
+	</script>
 
 	<!-- Services -->
 	<section id="services" aria-labelledby="services-heading" class="bg-slate-100 py-24 text-brand-slate">
@@ -339,17 +354,43 @@ const marqueeItems = [...marqueeBadges, ...marqueeBadges];
 
 			<div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 				{services.map((service) => (
-					<article class="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-brand-signal hover:shadow-freight">
-						<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-navy text-brand-safety ring-1 ring-brand-navy/10" aria-hidden="true">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<path d="M3 7h11v9H3z" />
-								<path d="M14 10h4l3 3v3h-7z" />
-								<circle cx="7" cy="18" r="2" />
-								<circle cx="17" cy="18" r="2" />
-							</svg>
+					<article class="group relative flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-brand-signal hover:shadow-freight">
+						<div class="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-brand-navy via-brand-blue to-brand-slate text-brand-safety" aria-hidden="true">
+							<div class="absolute inset-0 bg-grid-faint opacity-30"></div>
+							{service.icon === 'hazmat' && (
+								<svg xmlns="http://www.w3.org/2000/svg" class="relative h-20 w-20" viewBox="0 0 80 80" fill="none">
+									<path d="M40 8 72 40 40 72 8 40 40 8Z" fill="currentColor" fill-opacity="0.16" stroke="currentColor" stroke-width="4" />
+									<path d="M40 24v19" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+									<path d="M40 55h.1" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+								</svg>
+							)}
+							{service.icon === 'reefer' && (
+								<svg xmlns="http://www.w3.org/2000/svg" class="relative h-20 w-20" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+									<path d="M40 12v56M18 26l44 28M62 26 18 54" />
+									<circle cx="40" cy="40" r="8" fill="currentColor" fill-opacity="0.18" />
+								</svg>
+							)}
+							{service.icon === 'team' && (
+								<svg xmlns="http://www.w3.org/2000/svg" class="relative h-24 w-24" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M18 62h60" />
+									<path d="M24 44h32l10 10h12v8H24z" fill="currentColor" fill-opacity="0.14" />
+									<circle cx="34" cy="66" r="6" />
+									<circle cx="68" cy="66" r="6" />
+									<path d="M28 28h18M54 28h14" />
+								</svg>
+							)}
+							{service.icon === 'states' && (
+								<svg xmlns="http://www.w3.org/2000/svg" class="relative h-24 w-24" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M18 57c9-20 25-28 45-24 8 2 13 6 15 13-10 2-15 8-18 18-15-5-29-4-42-7Z" fill="currentColor" fill-opacity="0.14" />
+									<path d="M48 28c0 12-12 18-12 18s-12-6-12-18a12 12 0 0 1 24 0Z" />
+									<circle cx="36" cy="28" r="3" fill="currentColor" />
+									<path d="M62 42h12M54 54h18" />
+								</svg>
+							)}
 						</div>
 
-						<h3 class="mt-5 text-xl font-black uppercase text-brand-navy">{service.title}</h3>
+						<div class="flex flex-1 flex-col p-7">
+						<h3 class="text-xl font-black uppercase text-brand-navy">{service.title}</h3>
 						<p class="mt-3 leading-7 text-slate-600">{service.description}</p>
 
 						<ul class="mt-5 space-y-2 text-sm text-slate-600">
@@ -365,6 +406,7 @@ const marqueeItems = [...marqueeBadges, ...marqueeBadges];
 							Get a Quote
 							<span aria-hidden="true">→</span>
 						</a>
+						</div>
 					</article>
 				))}
 			</div>
