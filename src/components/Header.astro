@@ -7,8 +7,11 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-	{ href: '#services', label: 'Services' },
-	{ href: '#contact', label: 'Request Quote' },
+	{ href: '/', label: 'Home' },
+	{ href: '/#about', label: 'About Us' },
+	{ href: '/#services', label: 'Services' },
+	{ href: '/#contact', label: 'Get a Quote' },
+	{ href: '/#careers', label: 'Careers' },
 	{ href: '/privacy', label: 'Privacy' },
 	{ href: '/terms', label: 'Terms' },
 ];
@@ -19,8 +22,8 @@ const navLinks: NavLink[] = [
 		<a href="/" class="inline-flex items-center gap-3" aria-label="Prestige, Inc. home">
 			<span class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-safety text-sm font-black text-brand-navy">PI</span>
 			<span>
-				<span class="block text-lg font-bold leading-none">Prestige, Inc.</span>
-				<span class="mt-1 block text-xs font-semibold uppercase tracking-[0.2em] text-brand-mist">Logistics</span>
+				<span class="block text-lg font-bold leading-none">Prestige Transportation</span>
+				<span class="mt-1 block text-xs font-semibold uppercase tracking-[0.2em] text-brand-mist">Hazmat · Reefer · 48 States</span>
 			</span>
 		</a>
 
@@ -28,7 +31,7 @@ const navLinks: NavLink[] = [
 			{navLinks.map((link) => (
 				<a class="transition hover:text-brand-safety" href={link.href}>{link.label}</a>
 			))}
-			<Button href="#contact" class="hidden md:inline-flex">Quote</Button>
+			<Button href="/#contact" class="hidden md:inline-flex">Quote</Button>
 		</nav>
 	</div>
 </header>
