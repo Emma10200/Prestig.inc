@@ -1,0 +1,16 @@
+@config "../../tailwind.config.mjs";
+@import "tailwindcss";
+
+@layer base {
+	html {
+		color-scheme: light;
+	}
+
+	body {
+		@apply min-h-screen bg-brand-slate text-slate-100 antialiased;
+	}
+
+	:focus-visible {
+		@apply outline-2 outline-offset-2 outline-brand-safety;
+	}
+}

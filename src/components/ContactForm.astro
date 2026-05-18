@@ -1,0 +1,90 @@
+---
+interface ShipmentType {
+	value: string;
+	label: string;
+}
+
+const shipmentTypes: ShipmentType[] = [
+	{ value: 'truckload', label: 'Truckload freight' },
+	{ value: 'expedited', label: 'Expedited shipment' },
+	{ value: 'dedicated', label: 'Dedicated capacity' },
+	{ value: 'other', label: 'Other logistics need' },
+];
+
+const inputClasses = 'mt-2 block w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-brand-slate shadow-sm transition placeholder:text-slate-400 focus:border-brand-blue focus:outline-none focus:ring-4 focus:ring-brand-signal/20';
+---
+
+<form action="#" method="post" class="rounded-3xl bg-white p-6 text-brand-slate shadow-freight ring-1 ring-slate-200 sm:p-8">
+	<div class="grid gap-6 sm:grid-cols-2">
+		<label class="block text-sm font-semibold" for="first-name">
+			First name
+			<input class={inputClasses} id="first-name" name="first_name" type="text" autocomplete="given-name" required />
+		</label>
+
+		<label class="block text-sm font-semibold" for="last-name">
+			Last name
+			<input class={inputClasses} id="last-name" name="last_name" type="text" autocomplete="family-name" required />
+		</label>
+
+		<label class="block text-sm font-semibold" for="company">
+			Company
+			<input class={inputClasses} id="company" name="company" type="text" autocomplete="organization" />
+		</label>
+
+		<label class="block text-sm font-semibold" for="phone">
+			Phone number
+			<input class={inputClasses} id="phone" name="phone" type="tel" autocomplete="tel" required />
+		</label>
+
+		<label class="block text-sm font-semibold sm:col-span-2" for="email">
+			Email address
+			<input class={inputClasses} id="email" name="email" type="email" autocomplete="email" required />
+		</label>
+
+		<label class="block text-sm font-semibold" for="origin">
+			Origin
+			<input class={inputClasses} id="origin" name="origin" type="text" placeholder="City, State" required />
+		</label>
+
+		<label class="block text-sm font-semibold" for="destination">
+			Destination
+			<input class={inputClasses} id="destination" name="destination" type="text" placeholder="City, State" required />
+		</label>
+
+		<label class="block text-sm font-semibold sm:col-span-2" for="shipment-type">
+			Shipment type
+			<select class={inputClasses} id="shipment-type" name="shipment_type" required>
+				<option value="">Select a shipment type</option>
+				{shipmentTypes.map((type) => <option value={type.value}>{type.label}</option>)}
+			</select>
+		</label>
+
+		<label class="block text-sm font-semibold sm:col-span-2" for="details">
+			Shipment details
+			<textarea class={inputClasses} id="details" name="details" rows="5" placeholder="Freight dimensions, weight, timeline, or special handling notes"></textarea>
+		</label>
+	</div>
+
+	<label class="mt-6 flex gap-3 rounded-2xl border border-brand-blue/20 bg-slate-50 p-4 text-sm leading-6 text-slate-700" for="sms-consent">
+		<input
+			id="sms-consent"
+			name="sms_consent"
+			type="checkbox"
+			value="yes"
+			required
+			class="mt-1 h-4 w-4 rounded border-slate-400 text-brand-blue focus:ring-brand-signal"
+		/>
+		<span>By checking this box, I consent to receive text messages from Prestige, Inc. regarding my quote or shipment. Reply STOP to opt-out.</span>
+	</label>
+
+	<p class="mt-4 text-xs leading-6 text-slate-500">
+		Submitting this form does not create a shipment agreement. A Prestige, Inc. representative must confirm availability, terms, and pricing.
+	</p>
+
+	<button
+		type="submit"
+		class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-brand-safety px-6 py-3 text-sm font-bold uppercase tracking-[0.16em] text-brand-navy shadow-sm transition hover:bg-amber-300 focus-visible:outline-brand-safety sm:w-auto"
+	>
+		Submit quote request
+	</button>
+</form>
