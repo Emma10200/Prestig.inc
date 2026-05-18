@@ -10,7 +10,7 @@ export default {
 					steel: '#334155',
 					slate: '#0F172A',
 					mist: '#E2E8F0',
-					safety: '#F59E0B',
+					safety: '#7DD3FC',
 					signal: '#38BDF8',
 					white: '#FFFFFF',
 				},

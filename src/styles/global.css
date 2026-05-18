@@ -23,7 +23,7 @@
 	.bg-radial-glow {
 		background-image:
 			radial-gradient(ellipse 80% 60% at 50% 0%, rgba(56, 189, 248, 0.18), transparent 60%),
-			radial-gradient(ellipse 60% 40% at 80% 100%, rgba(245, 158, 11, 0.18), transparent 60%);
+			radial-gradient(ellipse 60% 40% at 80% 100%, rgba(125, 211, 252, 0.18), transparent 60%);
 	}
 
 	.bg-grid-faint {

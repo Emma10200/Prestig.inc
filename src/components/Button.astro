@@ -8,7 +8,7 @@ export interface Props {
 const { href, variant = 'primary', class: className = '' } = Astro.props;
 
 const variants: Record<NonNullable<Props['variant']>, string> = {
-	primary: 'bg-brand-safety text-brand-navy hover:bg-amber-300 focus-visible:outline-brand-safety',
+	primary: 'bg-brand-safety text-brand-navy hover:bg-sky-300 focus-visible:outline-brand-safety',
 	secondary: 'border border-brand-navy/20 bg-white text-brand-navy hover:border-brand-signal hover:text-brand-blue',
 };
 ---

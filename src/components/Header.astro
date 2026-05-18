@@ -15,6 +15,8 @@ const navLinks: NavLink[] = [
 	{ href: '/privacy', label: 'Privacy' },
 	{ href: '/terms', label: 'Terms' },
 ];
+
+const applyUrl = 'https://driver-application.streamlit.app/?company=pg';
 ---
 
 <header class="sticky top-0 z-50 border-b border-white/10 bg-brand-navy/95 text-white shadow-lg shadow-slate-950/20 backdrop-blur">
@@ -22,8 +24,8 @@ const navLinks: NavLink[] = [
 		<a href="/" class="inline-flex items-center gap-3" aria-label="Prestige, Inc. home">
 			<span class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-safety text-sm font-black text-brand-navy">PI</span>
 			<span>
-				<span class="block text-lg font-bold leading-none">Prestige Transportation</span>
-				<span class="mt-1 block text-xs font-semibold uppercase tracking-[0.2em] text-brand-mist">Hazmat · Reefer · 48 States</span>
+				<span class="block text-lg font-bold leading-none">Prestige, Inc.</span>
+				<span class="mt-1 block text-xs font-semibold uppercase tracking-[0.2em] text-brand-mist">prestige.inc</span>
 			</span>
 		</a>
 
@@ -31,6 +33,14 @@ const navLinks: NavLink[] = [
 			{navLinks.map((link) => (
 				<a class="transition hover:text-brand-safety" href={link.href}>{link.label}</a>
 			))}
+			<a
+				href={applyUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="hidden md:inline-flex items-center justify-center rounded-full border border-brand-safety/40 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-safety transition hover:bg-brand-safety hover:text-brand-navy"
+			>
+				Apply / Drive
+			</a>
 			<Button href="/#contact" class="hidden md:inline-flex">Quote</Button>
 		</nav>
 	</div>

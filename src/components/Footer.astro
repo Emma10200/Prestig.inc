@@ -4,35 +4,78 @@ interface FooterLink {
 	label: string;
 }
 
-const legalLinks: FooterLink[] = [
+const quickLinks: FooterLink[] = [
 	{ href: '/#contact', label: 'Get a Quote' },
 	{ href: '/#contact', label: 'Track a Shipment' },
 	{ href: '/#contact', label: 'Request P.O.D.' },
 	{ href: '/#careers', label: 'Careers' },
+];
+
+const legalLinks: FooterLink[] = [
 	{ href: '/privacy', label: 'Privacy Policy' },
 	{ href: '/terms', label: 'Terms of Service' },
 ];
 
+const applyUrl = 'https://driver-application.streamlit.app/?company=pg';
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="border-t border-white/10 bg-brand-slate text-slate-300">
-	<div class="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-10 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-10">
+	<div class="mx-auto grid max-w-7xl gap-10 px-6 py-14 sm:px-8 md:grid-cols-2 lg:grid-cols-4 lg:px-10">
 		<div>
-			<p class="text-lg font-bold text-white">Prestige Transportation</p>
-			<p class="mt-2 max-w-xl text-sm leading-6 text-slate-400">
-				Hazmat certified, refrigerated, team-driver, and coast-to-coast transportation support with audit-ready privacy, terms, and SMS consent structure.
+			<p class="text-lg font-bold text-white">Prestige, Inc.</p>
+			<p class="mt-3 text-sm leading-7 text-slate-400">
+				Hazmat certified, refrigerated, team-driver, and coast-to-coast transportation across all 48 contiguous states.
+			</p>
+			<a
+				href={applyUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="mt-6 inline-flex items-center justify-center rounded-full bg-brand-safety px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-brand-navy transition hover:bg-sky-300"
+			>
+				Drive With Prestige
+			</a>
+		</div>
+
+		<div>
+			<p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-safety">Headquarters</p>
+			<address class="mt-3 not-italic text-sm leading-7 text-slate-300">
+				Prestige, Inc.<br />
+				3810 North Ave.<br />
+				Stone Park, IL 60165
+			</address>
+			<p class="mt-4 text-sm leading-7 text-slate-300">
+				<a class="hover:text-brand-safety" href="tel:+17733034616">773-303-4616</a><br />
+				<a class="hover:text-brand-safety" href="mailto:safety@prestige.inc">safety@prestige.inc</a>
 			</p>
 		</div>
 
-		<nav aria-label="Legal links" class="flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
-			{legalLinks.map((link) => (
-				<a class="transition hover:text-brand-safety" href={link.href}>{link.label}</a>
-			))}
-		</nav>
+		<div>
+			<p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-safety">Authorities</p>
+			<dl class="mt-3 space-y-2 text-sm text-slate-300">
+				<div class="flex gap-2"><dt class="font-bold text-white">MC</dt><dd>553373</dd></div>
+				<div class="flex gap-2"><dt class="font-bold text-white">DOT</dt><dd>1454866</dd></div>
+			</dl>
+		</div>
+
+		<div>
+			<p class="text-xs font-bold uppercase tracking-[0.22em] text-brand-safety">Quick Links</p>
+			<ul class="mt-3 space-y-2 text-sm">
+				{quickLinks.map((link) => (
+					<li><a class="text-slate-300 transition hover:text-brand-safety" href={link.href}>{link.label}</a></li>
+				))}
+			</ul>
+		</div>
 	</div>
 
-	<div class="border-t border-white/10 px-6 py-5 text-center text-xs text-slate-500 sm:px-8 lg:px-10">
-		<p>&copy; {currentYear} Prestige, Inc. All rights reserved.</p>
+	<div class="border-t border-white/10">
+		<div class="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
+			<p>&copy; {currentYear} Prestige, Inc. All rights reserved.</p>
+			<nav aria-label="Legal links" class="flex flex-wrap gap-x-5 gap-y-2 font-semibold">
+				{legalLinks.map((link) => (
+					<a class="transition hover:text-brand-safety" href={link.href}>{link.label}</a>
+				))}
+			</nav>
+		</div>
 	</div>
 </footer>
